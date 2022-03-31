@@ -1,6 +1,6 @@
 package com.microservices.classroom.exception;
 
-import com.rucha.workout.vo.ErrorMessage;
+import com.microservices.classroom.vo.ErrorMessage;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;

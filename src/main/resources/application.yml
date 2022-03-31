@@ -1,4 +1,24 @@
 server:
   port: 8086
   servlet:
-    context-path: /classroom # mdmdata
+    context-path: /classroom
+
+spring:
+  main:
+    allow-bean-definition-overriding: true
+  application:
+    name: classroom-service
+  jpa:
+    database-platform: org.hibernate.dialect.SQLServer2012Dialect
+    show-sql: true
+  datasource:
+    url: jdbc:sqlserver://localhost;databaseName=Classroom;encrypt=true;trustServerCertificate=true;
+    username: sa
+    password: tanu123
+    driver-class-name: com.microsoft.sqlserver.jdbc.SQLServerDriver
+    hikari:
+      connection-timeout: 10000
+      idle-timeout: 30000
+      max-lifetime: 10000
+      maximum-pool-size: 100
+
