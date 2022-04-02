@@ -7,4 +7,5 @@ public interface AuthRegisterService {
 
     GenericResponse createUser(User user);
 
+    GenericResponse loginUser(User user);
 }

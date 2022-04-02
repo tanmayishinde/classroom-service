@@ -21,4 +21,9 @@ public class AuthAndRegisterController {
         return service.createUser(user);
     }
 
+    @PostMapping("/loginUser")
+    public GenericResponse loginUser(@RequestBody User user){
+        return service.loginUser(user);
+    }
+
 }
