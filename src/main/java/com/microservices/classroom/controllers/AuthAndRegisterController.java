@@ -4,10 +4,7 @@ import com.microservices.classroom.entity.User;
 import com.microservices.classroom.service.AuthRegisterService;
 import com.microservices.classroom.vo.GenericResponse;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/user")
@@ -24,6 +21,21 @@ public class AuthAndRegisterController {
     @PostMapping("/loginUser")
     public GenericResponse loginUser(@RequestBody User user){
         return service.loginUser(user);
+    }
+
+    @PostMapping("/forgetPassword")
+    public GenericResponse forgetPassword(@RequestBody User user){
+        return service.forgetPassword(user);
+    }
+
+    @GetMapping("/otpVerify")
+    public GenericResponse otpVerification(@RequestParam String otp){
+        return service.otpVerification(otp);
+    }
+
+    @PutMapping("/updatePassword")
+    public GenericResponse updatePassword(@RequestBody User user) {
+        return service.updatePassword(user);
     }
 
 }

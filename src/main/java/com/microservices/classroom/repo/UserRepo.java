@@ -23,5 +23,10 @@ public interface UserRepo extends JpaRepository<User, Long> {
     @Query(value = DBQuery.loginUserQuery, nativeQuery = true)
     DBUserInterface loginUser(String email);
 
+    @Transactional
+    @Modifying
+    @Query(value = DBQuery.updatePasswordQuery, nativeQuery = true)
+    int updatePassword(String password,String email);
+
 
 }

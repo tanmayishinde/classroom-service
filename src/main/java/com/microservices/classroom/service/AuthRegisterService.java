@@ -8,4 +8,10 @@ public interface AuthRegisterService {
     GenericResponse createUser(User user);
 
     GenericResponse loginUser(User user);
+
+    GenericResponse forgetPassword(User user);
+
+    GenericResponse otpVerification(String otp);
+
+    GenericResponse updatePassword(User user);
 }
