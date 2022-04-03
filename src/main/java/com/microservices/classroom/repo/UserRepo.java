@@ -9,6 +9,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import javax.transaction.Transactional;
+import java.util.List;
 
 @Repository
 public interface UserRepo extends JpaRepository<User, Long> {
@@ -28,5 +29,7 @@ public interface UserRepo extends JpaRepository<User, Long> {
     @Query(value = DBQuery.updatePasswordQuery, nativeQuery = true)
     int updatePassword(String password,String email);
 
+    @Query(value = DBQuery.getUserByStatus, nativeQuery = true)
+    List<DBUserInterface> getUserByStatus(Integer status);
 
 }

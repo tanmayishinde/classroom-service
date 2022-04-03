@@ -23,4 +23,8 @@ public final class DBQuery {
             = "UPDATE [User] " +
             "SET Password = ? " +
             "WHERE Email = ?";
+
+    public static final String getUserByStatus
+            = "SELECT * from [User] " +
+            "WHERE Status = ?";
 }

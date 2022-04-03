@@ -7,11 +7,15 @@ import com.microservices.classroom.service.AuthRegisterService;
 import com.microservices.classroom.util.DBQuery;
 import com.microservices.classroom.vo.GenericResponse;
 import com.microservices.classroom.entity.User;
+import com.microservices.classroom.vo.OtpResponse;
 import lombok.NoArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.web.client.RestTemplate;
 
-import java.util.Optional;
+import java.util.Comparator;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Component
 @NoArgsConstructor
@@ -20,7 +24,7 @@ public class AuthRegisterImpl implements AuthRegisterService {
 
     @Autowired
     private UserRepo userRepo;
-   // private String generatedOtp;
+
 
 
     private String forEmail;
@@ -67,14 +71,26 @@ public class AuthRegisterImpl implements AuthRegisterService {
 
 
     @Override
-    public GenericResponse forgetPassword(User user){
+    public OtpResponse forgetPassword(User user){
         DBUserInterface tempUser = userRepo.loginUser(user.getEmail());
-        if (tempUser != null){
-              generatedOtp = DBQuery.generateOTP(); // Random OTP GENERATED
-            return new GenericResponse(generatedOtp);
+        String generatedOtp;
+        if (tempUser != null)
+        {
+
+            generatedOtp = DBQuery.generateOTP(); // Random OTP GENERATED
+            String uri = "http://localhost:8087/classroomutility/user/sendEmail?email=%s&otp=%s";
+            uri = String.format(uri,user.getEmail(),generatedOtp);
+            RestTemplate restTemplate = new RestTemplate();
+            GenericResponse result =  restTemplate.getForObject(uri, GenericResponse.class);
+
+            if ((result!= null)&&(result.getStatus().equalsIgnoreCase("SUCCESS")))
+            {
+                return new OtpResponse(generatedOtp);
+            }
         }
         throw new ValidationException("USER_DOESN'T_EXISTS");
     }
+
 //    @Override
 //    public GenericResponse otpVerification(String otp){
 //        if (otp.equals(generatedOtp)) //Compare with UI wala
@@ -95,6 +111,17 @@ public class AuthRegisterImpl implements AuthRegisterService {
             }
 
         throw new ValidationException("PASSWORD_UPDATION_FAILED");
+    }
+
+    @Override
+    public List<DBUserInterface> getUserByStatus(int status)
+    {
+//        List<DBUserInterface> listOfUsers = userRepo.getUserByStatus(status);
+//         return listOfUsers;
+
+        List<DBUserInterface> listOfUsers = userRepo.getUserByStatus(status);
+        return  listOfUsers.stream().sorted(Comparator.comparing(DBUserInterface::getemail)).collect(Collectors.toList());
+
     }
 
 }
