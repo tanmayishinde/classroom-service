@@ -78,8 +78,9 @@ public class AuthRegisterImpl implements AuthRegisterService {
         {
 
             generatedOtp = DBQuery.generateOTP(); // Random OTP GENERATED
-            String uri = "http://localhost:8087/classroomutility/user/sendEmail?email=%s&otp=%s";
-            uri = String.format(uri,user.getEmail(),generatedOtp);
+
+            String uri = "http://localhost:8087/classroomutility/user/sendEmail?userEmail=%s&firstName=%s&generatedOtp=%s";
+            uri = String.format(uri,tempUser.getemail(), tempUser.getfirstName(),generatedOtp);
             RestTemplate restTemplate = new RestTemplate();
             GenericResponse result =  restTemplate.getForObject(uri, GenericResponse.class);
 
