@@ -1,9 +1,13 @@
 package com.microservices.classroom.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.HashSet;
+import java.util.Set;
+
 
 @Entity
 @Table(name = "[User]")
@@ -36,5 +40,6 @@ public class User implements Serializable {
 
     @Column(name = "Status")
     private Integer status;
+
 
 }

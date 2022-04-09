@@ -27,4 +27,22 @@ public final class DBQuery {
     public static final String getUserByStatus
             = "SELECT * from [User] " +
             "WHERE Status = ?";
+
+    public static final String insertClassroomQuery
+            = "insert into [Classroom] (ClassroomName, ClassroomDescription, ClassroomSubject, DateCreated, CreatedBy) " +
+            "values (?, ?, ?, ?, ?)";
+
+    public static final String updateClassroomQuery
+            = "UPDATE Classroom " +
+            "SET ClassroomName = ? , ClassroomDescription =? , ClassroomSubject =? , CreatedBy =? " +
+            "WHERE ClassroomId = ?";
+
+    public static final String getClassroomByTeacherIdQuery
+            = "SELECT * from [Classroom] " +
+            "WHERE createdBy = ?";
+
+    public static final String getClassroomByClassroomIdQuery
+            = "SELECT * from [Classroom] " +
+            "WHERE classroomId = ?";
+
 }

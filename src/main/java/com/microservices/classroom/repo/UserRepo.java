@@ -32,4 +32,6 @@ public interface UserRepo extends JpaRepository<User, Long> {
     @Query(value = DBQuery.getUserByStatus, nativeQuery = true)
     List<DBUserInterface> getUserByStatus(Integer status);
 
+
+
 }

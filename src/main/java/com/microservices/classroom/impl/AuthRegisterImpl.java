@@ -24,13 +24,8 @@ public class AuthRegisterImpl implements AuthRegisterService {
 
     @Autowired
     private UserRepo userRepo;
-
-
-
     private String forEmail;
     private DBQuery dbQuery;
-
-
 
 
     @Override
@@ -91,15 +86,6 @@ public class AuthRegisterImpl implements AuthRegisterService {
         }
         throw new ValidationException("USER_DOESN'T_EXISTS");
     }
-
-//    @Override
-//    public GenericResponse otpVerification(String otp){
-//        if (otp.equals(generatedOtp)) //Compare with UI wala
-//        {
-//            return new GenericResponse("OTP_VERIFICATION_SUCCESSFUL.");
-//        }
-//        throw new ValidationException("VERIFICATION_UNSUCCESSFUL.");
-//    }
 
     @Override
     public GenericResponse updatePassword(User user){
