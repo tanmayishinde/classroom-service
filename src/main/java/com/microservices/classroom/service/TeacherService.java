@@ -16,4 +16,6 @@ public interface TeacherService
      GenericResponse updateClassroom(Classroom classroom);
 
      List<DBClassroomInterface> getClassroomByTeacherId(long  createdBy);
+
+     GenericResponse deleteClassroomByClassroomId(long classroomId);
 }

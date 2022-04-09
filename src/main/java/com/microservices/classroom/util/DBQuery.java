@@ -45,4 +45,9 @@ public final class DBQuery {
             = "SELECT * from [Classroom] " +
             "WHERE classroomId = ?";
 
+
+    public static final String deleteClassroomByClassroomIdQuery
+            = "Delete  from [Classroom] " +
+            "WHERE classroomId = ?";
+
 }

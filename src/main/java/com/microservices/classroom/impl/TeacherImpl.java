@@ -3,6 +3,7 @@ package com.microservices.classroom.impl;
 import com.microservices.classroom.entity.Classroom;
 import com.microservices.classroom.entity.DBClassroomInterface;
 
+import com.microservices.classroom.entity.DBUserInterface;
 import com.microservices.classroom.exception.ValidationException;
 import com.microservices.classroom.repo.ClassroomRepo;
 import com.microservices.classroom.service.TeacherService;
@@ -67,11 +68,22 @@ public class TeacherImpl implements TeacherService
     @Override
     public List<DBClassroomInterface> getClassroomByTeacherId(long createdBy)
     {
-//        List<DBUserInterface> listOfUsers = userRepo.getUserByStatus(status);
-//         return listOfUsers;
 
         List<DBClassroomInterface> listOfClassroom = classroomRepo.getClassroomByTeacherId(createdBy);
         return  listOfClassroom.stream().sorted(Comparator.comparing(DBClassroomInterface::getCreatedBy)).collect(Collectors.toList());
 
     }
+
+    @Override
+    public GenericResponse deleteClassroomByClassroomId(long classroomId) {
+        int tempClassroom= classroomRepo.deleteClassroomByClassroomId(classroomId);
+        if(tempClassroom > 0){
+            return new GenericResponse("SUCCESS");
+        }
+
+        throw new ValidationException("Classroom Details_UPDATION_FAILED");
+
+    }
+
+
 }

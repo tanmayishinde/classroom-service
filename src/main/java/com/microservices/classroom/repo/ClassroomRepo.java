@@ -36,4 +36,9 @@ public interface ClassroomRepo extends JpaRepository<User, Long> {
 
     @Query(value = DBQuery.getClassroomByClassroomIdQuery, nativeQuery = true)
     DBClassroomInterface getClassroomByClassroomId(Long classroomId);
+
+    @Transactional
+    @Modifying
+    @Query(value = DBQuery.deleteClassroomByClassroomIdQuery, nativeQuery = true)
+    int deleteClassroomByClassroomId(long classroomId);
 }

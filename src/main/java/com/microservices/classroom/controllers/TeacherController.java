@@ -34,4 +34,9 @@ public class TeacherController {
     public List<DBClassroomInterface> getClassroomByTeacherId(@RequestParam long createdBy) {
         return teacherService.getClassroomByTeacherId(createdBy);
     }
+
+    @DeleteMapping("/deleteClassroomByClassroomId")
+    public GenericResponse  deleteClassroomByClassroomId(@RequestParam long classroomId) {
+        return teacherService.deleteClassroomByClassroomId(classroomId);
+    }
 }
